@@ -1,0 +1,39 @@
+//asi se miraria el esquema de prisma.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+
+  firstName    String
+  lastName     String
+
+  email        String
+  address       String
+  collectionAddress    String
+  scheduledDate String
+  date         String?
+  referencePoint String
+  instructions String
+  phone        String
+  department   String
+  municipality String
+  packages     Package[]
+}
+
+model Package {
+  id           Int       @id @default(autoincrement())
+  content      String
+  length       String
+  height       String
+  width        String
+  weight       String
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id])
+}
